@@ -96,7 +96,7 @@ if __name__ == "__main__":
         low_cut_hz=low_cut_hz,
     )
 
-    # Set up Network training with validation and a final test-accuracy measurement.
+    # TODO: Set up Network training with validation and a final test-accuracy measurement.
     # Use PyTorch's Adam optimizer.
     # Use the X and y attributes of the set objects to access the EEG measurements
     # and corresponding labels.
