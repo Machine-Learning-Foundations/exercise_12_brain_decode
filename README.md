@@ -67,7 +67,3 @@ Preprocessing code from the paper-authors is already ready for in `src/util.py`.
 Use as much of your code from the last two days as possible. You can re-use your image-processing code treating the EEG signals as tensors with and 44 "color"-channels and a time dimension. Implement your solution in `src/train_brain_decoder.py`. Implement everything marked with a `TODO`.
 
 What happens if you train and test on two different study-participants?
-
-Solution for participant 1:
-
-![accuracy-plot](./figures/brain_decode_accuracy.png)
