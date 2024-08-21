@@ -35,11 +35,8 @@ def normalize(
     Returns:
         np.array, float, float: Normalized data, mean and std.
     """
-    if mean is None:
-        mean = np.mean(data)
-    if std is None:
-        std = np.std(data)
-    return (data - mean) / std, mean, std
+    # TODO: Return the normalized data as well as the mean and the standard deviation.
+    return None
 
 
 class BrainCNN(th.nn.Module):
@@ -53,24 +50,12 @@ class BrainCNN(th.nn.Module):
         for architectural inspiration.
         """
         super().__init__()
-        self.conv1 = nn.Conv1d(in_channels=44, out_channels=64, kernel_size=3)
-        self.pool1 = nn.MaxPool1d(kernel_size=2, stride=2)
-        self.conv2 = nn.Conv1d(in_channels=64, out_channels=128, kernel_size=3)
-        self.pool2 = nn.MaxPool1d(kernel_size=2, stride=2)
-        self.conv3 = nn.Conv1d(in_channels=128, out_channels=128, kernel_size=3)
-        self.linear = nn.Linear(35456, 4)
-        self.relu = nn.ReLU()
+        # TODO: Implement me!!
 
     def forward(self, x):
         """Run the forward pass of the network."""
-        x = self.relu(self.conv1(x))
-        x = self.pool1(x)
-        x = self.relu(self.conv2(x))
-        x = self.pool2(x)
-        x = self.relu(self.conv3(x))
-        x = th.reshape(x, [x.shape[0], -1])
-        x = self.linear(x)
-        return x
+        # TODO: Return the result of the forward pass instead of 0.
+        return 0.
 
 
 def get_acc(
@@ -88,8 +73,8 @@ def get_acc(
     Returns:
         th.Tensor: The accuracy in [%].
     """
-    logits = net(eeg_input)
-    accuracy = th.mean((th.argmax(logits, -1) == labels).type(th.float))
+    # TODO: Compute the correct accuracy.
+    accuracy = 0.
     return accuracy
 
 
@@ -111,51 +96,7 @@ if __name__ == "__main__":
         low_cut_hz=low_cut_hz,
     )
 
-    train_set_x, mean, std = normalize(train_set.X)
-    valid_set_x_np, _, _ = normalize(valid_set_np.X, mean, std)
-    test_set_x_np, _, _ = normalize(test_set_np.X, mean, std)
-
-    train_size = train_set.X.shape[0]
-    train_input = np.array_split(train_set_x, train_size // batch_size)
-    train_labels = np.array_split(train_set.y, train_size // batch_size)
-
-    valid_set_y = th.tensor(valid_set_np.y)
-    valid_set_x = th.tensor(valid_set_x_np)
-    test_set_y = th.tensor(test_set_np.y)
-    test_set_x = th.tensor(test_set_x_np)
-
-    cnn = BrainCNN()
-    opt = th.optim.Adam(cnn.parameters(), lr=0.001)
-    loss = nn.CrossEntropyLoss()
-
-    val_acc_list = []
-    for e in range(epochs):
-        train_loop = tqdm(
-            zip(train_input, train_labels),
-            total=len(train_input),
-            desc="Training Brain CNN",
-        )
-        for input_x, labels_y in train_loop:
-            input_x, _, _ = normalize(input_x, mean, std)
-            labels_y = th.tensor(labels_y)
-            input_x = th.tensor(input_x)
-
-            y_hat = cnn(input_x)
-            cel = loss(y_hat, labels_y)
-            cel.backward()
-            opt.step()
-            opt.zero_grad()
-            train_loop.set_description("Loss: {:2.3f}".format(cel))
-
-        val_accuracy = get_acc(cnn, valid_set_x, valid_set_y)
-        print("Validation accuracy {:2.3f} at epoch {}".format(val_accuracy, e + 1))  # type: ignore
-        val_acc_list.append(val_accuracy)
-
-    test_accuracy = get_acc(cnn, test_set_x, test_set_y)
-    print("Test accuracy: {:2.3f}".format(test_accuracy))  # type: ignore
-    plt.plot(val_acc_list, label="Validation accuracy")
-    plt.plot(len(val_acc_list) - 1, test_accuracy, ".", label="Test accuracy")
-    plt.xlabel("epochs")
-    plt.ylabel("accuracy")
-    plt.legend()
-    plt.show()
+    # Set up Network training with validation and a final test-accuracy measurement.
+    # Use PyTorch's Adam optimizer.
+    # Use the X and y attributes of the set objects to access the EEG measurements
+    # and corresponding labels.
