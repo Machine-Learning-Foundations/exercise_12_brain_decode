@@ -1,0 +1,10 @@
+nox
+numpy==1.23.0
+matplotlib
+mne==0.20.3
+resampy
+pandas
+h5py
+tqdm
+pytest
+torch
