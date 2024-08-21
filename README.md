@@ -11,7 +11,7 @@ into 13 runs per subject. The four classes of movements were movements of either
 hand, both feet, and rest (no movement, but same type of visual cue as for the other classes)."
 
 
-### Setting up dependencies.
+### Setting up dependencies
 Let's set up a conda environment for this exercise.
 Assuming conda is installed, please run:
 
