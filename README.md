@@ -27,8 +27,6 @@ Install the exercise dependencies:
 pip install -r requirements.txt
 ```
 
-
-
 ### Getting the data
 
 The dataset is available [online](https://gin.g-node.org/robintibor/high-gamma-dataset). We have prepared a download script for you.
@@ -45,7 +43,7 @@ The plot below shows the first four EEG sensors of a recording.
 
 Examine the data yourself.
 
-## Your task:
+### Your task:
 Train a CNN to recognize the four actions given only the EEG data.
 Preprocessing code from the paper-authors is already ready for in `src/util.py`. To get started have a look at `src/train_brain_decoder.py` and load the data via:
 ```python
